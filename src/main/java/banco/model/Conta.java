@@ -8,14 +8,15 @@ public class Conta {
     private String Cliente;
     private String cpf;
     private String email;
-    private BigInteger saldo;
+    private Long saldo;
 
-    public Conta(int numero, String cliente, String cpf, String email, BigInteger saldo) {
+    public Conta(int numero, String cliente, String cpf, String email, Long saldo) {
         this.numero = numero;
         Cliente = cliente;
+        this.saldo = saldo;
         this.cpf = cpf;
         this.email = email;
-        this.saldo = saldo;
+
     }
 
     public int getNumero() {
@@ -50,11 +51,11 @@ public class Conta {
         this.email = email;
     }
 
-    public BigInteger getSaldo() {
+    public Long getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(BigInteger saldo) {
+    public void setSaldo(Long saldo) {
         this.saldo = saldo;
     }
 }
