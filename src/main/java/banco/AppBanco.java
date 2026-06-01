@@ -5,18 +5,22 @@ import banco.connection.ConnectionFactory;
 import banco.model.Conta;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ServiceConfigurationError;
+import java.util.Set;
 
 public class AppBanco {
     public static void main(String[] args) {
 
-        Conta conta = new Conta(2,"noemia lode","09823456714","noemialode@gmail.com",(100000000L));
+
         ConnectionFactory connectionFactory = new ConnectionFactory();
         ContaDAO contaDAO = new ContaDAO(connectionFactory.recuperarConexao());
 
-        contaDAO.salvar(conta);
+        Set<Conta> lista  = contaDAO.listar();
 
 
-
+        System.out.println(lista);
 
 
     }

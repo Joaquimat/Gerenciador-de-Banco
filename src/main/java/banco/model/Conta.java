@@ -10,14 +10,6 @@ public class Conta {
     private String email;
     private Long saldo;
 
-    public Conta(int numero, String cliente, String cpf, String email, Long saldo) {
-        this.numero = numero;
-        Cliente = cliente;
-        this.saldo = saldo;
-        this.cpf = cpf;
-        this.email = email;
-
-    }
 
     public int getNumero() {
         return numero;
@@ -57,5 +49,16 @@ public class Conta {
 
     public void setSaldo(Long saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public String toString() {
+        return "Conta{" +
+                "numero=" + numero +
+                ", Cliente='" + Cliente + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                ", saldo=" + saldo +
+                '}' + '\n';
     }
 }
