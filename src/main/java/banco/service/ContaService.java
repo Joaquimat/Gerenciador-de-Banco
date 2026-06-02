@@ -123,7 +123,36 @@ public class ContaService {
                 }
             }
         }
+    }
 
+    public void depositarService(Conta conta) {
+
+        Connection conn = connectionFactory.recuperarConexao();
+
+        try {
+
+            ContaDAO contaDAO = new ContaDAO(conn);
+
+            Integer statusNum = conta.getNumero();
+
+            if (contaDAO.lerNum().contains(statusNum)) {
+                contaDAO.depositar(conta);
+                System.out.println("DEPOSITO REALIZADO");
+            } else {
+                System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }

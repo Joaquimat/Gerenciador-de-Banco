@@ -24,10 +24,11 @@ public class AppBanco {
 
 
 
-        conta.setEmail("biruleibeleibe");
         conta.setNumero(7);
+        conta.setSaldo(200L);
+        contaService.depositarService(conta);
 
-        contaService.atualizarService(conta);
+
 
 
         //System.out.println(lista);
