@@ -20,12 +20,12 @@ public class AppBanco {
 
         //Set<Conta> lista = contaDAO.listar();
 
-        conta.setEmail("noemia@bunda.com");
+        conta.setSaldo(200L);
         conta.setNumero(2);
 
         //System.out.println(lista);
 
-        contaDAO.atualizar(conta);
+        contaDAO.depositar(conta);
 
 
     }

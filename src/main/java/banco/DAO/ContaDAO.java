@@ -101,13 +101,30 @@ public class ContaDAO {
 
     }
 
-    public void atualizar(Conta conta){
+    public void atualizar(Conta conta) {
 
         try {
 
             PreparedStatement ps = conn.prepareStatement("UPDATE conta SET email = ? WHERE numero = ?");
 
-            ps.setString(1,conta.getEmail());
+            ps.setString(1, conta.getEmail());
+            ps.setInt(2, conta.getNumero());
+
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void depositar(Conta conta){
+
+        try {
+
+            PreparedStatement ps = conn.prepareStatement("UPDATE conta SET saldo = saldo + ? WHERE numero = ?");
+
+            ps.setLong(1,conta.getSaldo());
             ps.setInt(2,conta.getNumero());
 
             ps.executeUpdate();
