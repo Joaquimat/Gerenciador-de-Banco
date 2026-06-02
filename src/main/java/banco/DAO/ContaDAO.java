@@ -137,7 +137,7 @@ public class ContaDAO {
         }
     }
 
-    public void sacar(Conta conta){
+    public void sacar(Conta conta) {
 
         try {
 
@@ -150,9 +150,46 @@ public class ContaDAO {
             ps.close();
             conn.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Conta buscarPorNumero(Conta conta) {
+
+        try {
+
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM conta WHERE numero = ?");
+
+            ps.setInt(1, conta.getNumero());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                int numero = rs.getInt(1);
+                String cliente = rs.getString(2);
+                Long saldo = rs.getLong(3);
+                String cpf = rs.getString(4);
+                String email = rs.getString(5);
+
+                conta.setNumero(numero);
+                conta.setCliente(cliente);
+                conta.setSaldo(saldo);
+                conta.setCpf(cpf);
+                conta.setEmail(email);
+            }
+
+            ps.close();
+            rs.close();
+            conn.close();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return conta;
+
     }
 
 }
