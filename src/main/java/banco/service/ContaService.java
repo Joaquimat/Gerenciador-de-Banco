@@ -96,5 +96,35 @@ public class ContaService {
         }
     }
 
+    public void atualizarService(Conta conta) {
+
+        Connection conn = connectionFactory.recuperarConexao();
+
+        try {
+            ContaDAO contaDAO = new ContaDAO(conn);
+
+            Integer statusNum = conta.getNumero();
+
+            if (contaDAO.lerNum().contains(statusNum)) {
+                contaDAO.atualizar(conta);
+                System.out.println("CONTA ATUALIZADA");
+            } else {
+                System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 }
 
