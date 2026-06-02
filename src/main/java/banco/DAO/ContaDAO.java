@@ -83,13 +83,32 @@ public class ContaDAO {
 
     }
 
-    public void deletar(Conta conta){
+    public void deletar(Conta conta) {
 
         try {
 
             PreparedStatement ps = conn.prepareStatement("DELETE FROM conta WHERE numero = ?");
 
-            ps.setInt(1,conta.getNumero());
+            ps.setInt(1, conta.getNumero());
+
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void atualizar(Conta conta){
+
+        try {
+
+            PreparedStatement ps = conn.prepareStatement("UPDATE conta SET email = ? WHERE numero = ?");
+
+            ps.setString(1,conta.getEmail());
+            ps.setInt(2,conta.getNumero());
 
             ps.executeUpdate();
             ps.close();
@@ -98,8 +117,5 @@ public class ContaDAO {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-
-
-
     }
 }
