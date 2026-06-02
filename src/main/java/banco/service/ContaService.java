@@ -20,10 +20,7 @@ public class ContaService {
 
             ContaDAO contaDAO = new ContaDAO(conn);
 
-            Integer statusNum = conta.getNumero();
-            String statusCpf = conta.getCpf();
-
-            if (contaDAO.lerNum().contains(statusNum) || contaDAO.lerCpf().contains(statusCpf)) {
+            if (contaDAO.lerNum().contains(conta.getNumero()) || contaDAO.lerCpf().contains(conta.getCpf())) {
                 System.out.println("ATENÇÃO: ESSA CONTA JÁ EXISTE");
                 return;
             }
@@ -51,9 +48,7 @@ public class ContaService {
 
             ContaDAO contaDAO = new ContaDAO(conn);
 
-            Integer statusNum = conta.getNumero();
-
-            if (contaDAO.lerNum().contains(statusNum)) {
+            if (contaDAO.lerNum().contains(conta.getNumero())) {
                 contaDAO.deletar(conta);
                 System.out.println("CONTA DELETADA");
             } else {
@@ -103,9 +98,7 @@ public class ContaService {
         try {
             ContaDAO contaDAO = new ContaDAO(conn);
 
-            Integer statusNum = conta.getNumero();
-
-            if (contaDAO.lerNum().contains(statusNum)) {
+            if (contaDAO.lerNum().contains(conta.getNumero())) {
                 contaDAO.atualizar(conta);
                 System.out.println("CONTA ATUALIZADA");
             } else {
@@ -133,14 +126,41 @@ public class ContaService {
 
             ContaDAO contaDAO = new ContaDAO(conn);
 
-            Integer statusNum = conta.getNumero();
-
-            if (contaDAO.lerNum().contains(statusNum)) {
+            if (contaDAO.lerNum().contains(conta.getNumero())) {
                 contaDAO.depositar(conta);
                 System.out.println("DEPOSITO REALIZADO");
             } else {
                 System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE");
             }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void sacarService(Conta conta) {
+
+        Connection conn = connectionFactory.recuperarConexao();
+
+        try {
+
+            ContaDAO contaDAO = new ContaDAO(conn);
+
+            if (contaDAO.lerNum().contains(conta.getNumero()) && contaDAO.lerSaldo().contains(conta.getSaldo() > 0L)) {
+                contaDAO.sacar(conta);
+                System.out.println("SAQUE REALIZADO");
+            } else {
+                System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE OU NAO POSSUI SALDO");
+            }
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);

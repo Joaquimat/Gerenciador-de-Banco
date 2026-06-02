@@ -24,9 +24,10 @@ public class AppBanco {
 
 
 
-        conta.setNumero(7);
-        conta.setSaldo(200L);
-        contaService.depositarService(conta);
+        conta.setNumero(1);
+        conta.setSaldo(100L);
+        contaService.sacarService(conta);
+      //contaService.depositarService(conta);
 
 
 

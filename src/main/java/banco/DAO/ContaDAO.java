@@ -300,5 +300,40 @@ public class ContaDAO {
         }
         return contas;
     }
+    public Set<Long> lerSaldo() {
+
+        Set<Long> contas = new HashSet<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT saldo FROM conta");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                contas.add(rs.getLong(1));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return contas;
+    }
 }
 
