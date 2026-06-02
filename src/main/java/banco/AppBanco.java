@@ -25,7 +25,7 @@ public class AppBanco {
 
         //System.out.println(lista);
 
-        contaDAO.depositar(conta);
+        contaDAO.sacar(conta);
 
 
     }
