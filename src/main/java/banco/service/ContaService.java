@@ -11,7 +11,7 @@ public class ContaService {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    public void salvar(Conta conta) {
+    public void salvarService(Conta conta) {
 
         Connection conn = connectionFactory.recuperarConexao();
 
@@ -27,6 +27,7 @@ public class ContaService {
                 return;
             }
             contaDAO.salvar(conta);
+            System.out.println("CONTA SALVA");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -37,6 +38,38 @@ public class ContaService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        }
+
+    }
+
+    public void deletarService(Conta conta) {
+
+        Connection conn = connectionFactory.recuperarConexao();
+
+        try {
+
+            ContaDAO contaDAO = new ContaDAO(conn);
+
+            Integer statusNum = conta.getNumero();
+
+            if (contaDAO.lerNum().contains(statusNum)) {
+                contaDAO.deletar(conta);
+                System.out.println("CONTA DELETADA");
+            } else {
+                System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }
 

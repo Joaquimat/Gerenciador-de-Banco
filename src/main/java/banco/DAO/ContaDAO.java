@@ -42,6 +42,7 @@ public class ContaDAO {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -75,12 +76,14 @@ public class ContaDAO {
                 try {
                     rs.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -105,6 +108,7 @@ public class ContaDAO {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -127,6 +131,7 @@ public class ContaDAO {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -151,6 +156,7 @@ public class ContaDAO {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -175,6 +181,7 @@ public class ContaDAO {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -208,12 +215,14 @@ public class ContaDAO {
                 try {
                     rs.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -242,12 +251,14 @@ public class ContaDAO {
                 try {
                     rs.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -276,12 +287,14 @@ public class ContaDAO {
                 try {
                     rs.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
