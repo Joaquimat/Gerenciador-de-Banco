@@ -54,11 +54,11 @@ public class Conta {
     @Override
     public String toString() {
         return "Conta{" +
-                "numero=" + numero +
-                ", Cliente='" + Cliente + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                ", saldo=" + saldo +
+                "numero= " + numero +
+                ", Cliente= '" + Cliente + '\'' +
+                ", cpf= '" + cpf + '\'' +
+                ", email= '" + email + '\'' +
+                ", saldo= " + saldo + "R$" +
                 '}' + '\n';
     }
 }

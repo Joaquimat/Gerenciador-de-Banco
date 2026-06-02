@@ -23,12 +23,12 @@ public class AppBanco {
         //Set<Conta> lista = contaDAO.listar();
 
 
-        conta.setNumero(3);
+        conta.setNumero(2);
         conta.setCliente("rabelido");
         conta.setCpf("12345678909");
         conta.setEmail("biruleibeleibe");
 
-        contaService.deletarService(conta);
+        System.out.println(contaService.listarService());
 
 
         //System.out.println(lista);

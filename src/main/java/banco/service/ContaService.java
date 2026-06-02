@@ -6,6 +6,7 @@ import banco.model.Conta;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Set;
 
 public class ContaService {
 
@@ -40,7 +41,6 @@ public class ContaService {
                 }
             }
         }
-
     }
 
     public void deletarService(Conta conta) {
@@ -69,10 +69,31 @@ public class ContaService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         }
+    }
 
+    public Set<Conta> listarService() {
+
+        Connection conn = null;
+        ContaDAO contaDAO = null;
+        try {
+            conn = connectionFactory.recuperarConexao();
+
+            contaDAO = new ContaDAO(conn);
+            return contaDAO.listar();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
