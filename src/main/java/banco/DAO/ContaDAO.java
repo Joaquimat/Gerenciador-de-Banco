@@ -82,4 +82,24 @@ public class ContaDAO {
         return contas;
 
     }
+
+    public void deletar(Conta conta){
+
+        try {
+
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM conta WHERE numero = ?");
+
+            ps.setInt(1,conta.getNumero());
+
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+
+
+    }
 }

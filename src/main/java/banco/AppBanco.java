@@ -16,11 +16,15 @@ public class AppBanco {
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
         ContaDAO contaDAO = new ContaDAO(connectionFactory.recuperarConexao());
+        Conta conta = new Conta();
 
-        Set<Conta> lista  = contaDAO.listar();
+        //Set<Conta> lista = contaDAO.listar();
 
+        conta.setNumero(1);
 
-        System.out.println(lista);
+        //System.out.println(lista);
+
+        contaDAO.deletar(conta);
 
 
     }
