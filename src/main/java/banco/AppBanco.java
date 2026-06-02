@@ -24,10 +24,11 @@ public class AppBanco {
 
 
 
-        conta.setNumero(1);
+        conta.setNumero(2);
         conta.setSaldo(100L);
         contaService.sacarService(conta);
       //contaService.depositarService(conta);
+        System.out.println(contaService.buscarPNumeroService(conta));
 
 
 

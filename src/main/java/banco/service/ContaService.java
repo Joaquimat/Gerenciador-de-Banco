@@ -175,5 +175,28 @@ public class ContaService {
         }
     }
 
+    public Conta buscarPNumeroService(Conta conta) {
+
+        Connection conn = null;
+        ContaDAO contaDAO = null;
+        try {
+            conn = connectionFactory.recuperarConexao();
+
+            contaDAO = new ContaDAO(conn);
+            return contaDAO.buscarPorNumero(conta);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
 
