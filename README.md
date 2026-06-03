@@ -2,45 +2,33 @@
 
 ## 📌 Sobre o Projeto
 
-Este projeto é um **sistema bancário simples** desenvolvido em **Java** utilizando **JDBC** e **MySQL**.
+Este é um **sistema bancário simples** desenvolvido em **Java**, utilizando **JDBC** para comunicação com o banco de dados **MySQL**.
 
-O foco principal **não é criar um sistema completo**, mas sim **aprender na prática** conceitos importantes de desenvolvimento backend e banco de dados, entendendo cada etapa da implementação.
+O projeto foi criado com foco em **aprendizado prático**, consolidando conceitos fundamentais de backend e persistência de dados.
 
 ---
 
-## 🎯 Objetivos de Aprendizado
+## 🎯 Objetivos do Projeto
 
-* JDBC
-* Conexão com banco de dados
-* CRUD (Create, Read, Update, Delete)
-* PreparedStatement
-* ResultSet
-* Arquitetura em camadas
-* Manipulação de coleções
-* Tratamento de exceções SQL
+* Praticar integração entre Java e banco de dados
+* Aplicar operações CRUD na prática
+* Entender o funcionamento do JDBC
+* Trabalhar com arquitetura em camadas
+* Desenvolver lógica de negócio do zero
 
 ---
 
 ## 🧩 Funcionalidades
 
-### Conta Bancária
+O sistema permite:
 
-A entidade principal do sistema é a **Conta**, que possui:
-
-* Número da conta
-* Nome do cliente
-* Saldo
-* CPF
-* E-mail
-
-### Funcionalidades implementadas / planejadas:
-
-* Criar conta
-* Listar contas
-* Buscar conta
-* Depositar
-* Sacar
-* Excluir conta (futuro)
+* ✅ Criar contas bancárias
+* ✅ Listar contas cadastradas
+* ✅ Buscar conta por número
+* ✅ Realizar depósitos
+* ✅ Realizar saques
+* ✅ Atualizar saldo
+* ✅ Excluir contas
 
 ---
 
@@ -49,39 +37,34 @@ A entidade principal do sistema é a **Conta**, que possui:
 * Banco: **MySQL**
 * Tabela principal: `conta`
 
-### Estrutura da tabela:
+### Estrutura:
 
-| Campo   | Tipo        |
-| ------- | ----------- |
-| numero  | BIGINT (PK) |
-| cliente | VARCHAR     |
-| saldo   | BIGINT      |
-| cpf     | VARCHAR     |
-| email   | VARCHAR     |
+| Campo   | Tipo          |
+| ------- | ------------- |
+| numero  | BIGINT (PK)   |
+| cliente | VARCHAR       |
+| saldo   | DECIMAL(15,2) |
+| cpf     | VARCHAR       |
+| email   | VARCHAR       |
 
 🔑 **Chave primária:** `numero`
 
 ---
 
-## 💰 Observação sobre o saldo
+## 💰 Modelagem de Valores Monetários
 
-Inicialmente foi utilizado:
+O projeto evoluiu para utilizar:
 
-* `BIGINT` no banco
-* `Long` no Java
-
-📌 Porém, o ideal para valores monetários é:
-
-* Banco: `DECIMAL(15,2)`
+* Banco de dados: `DECIMAL(15,2)`
 * Java: `BigDecimal`
 
-Isso evita problemas de precisão com centavos.
+✔ Isso garante precisão em operações financeiras.
 
 ---
 
-## 🏗️ Estrutura do Projeto
+## 🏗️ Arquitetura do Projeto
 
-```
+```id="estruturasys"
 AppBanco (Main)
 │
 ├── connection
@@ -90,173 +73,83 @@ AppBanco (Main)
 ├── dao
 │   └── ContaDAO
 │
+├── service
+│   └── ContaService
+│
 └── model
     └── Conta
 ```
 
 ---
 
-## 🔌 Conexão com o Banco
-
-### ConnectionFactory
-
-Responsável por:
-
-* Abrir conexão com o MySQL
-* Retornar um objeto `Connection`
-
-Método principal:
-
-```java
-Connection recuperarConexao()
-```
-
----
-
-## 📦 Entidade Conta
-
-Classe responsável por representar uma conta bancária.
-
-Possui:
-
-* Atributos privados
-* Getters e setters
-* Construtores
-
----
-
-## 🛠️ Camada DAO
-
-### ContaDAO
-
-Responsável por executar operações SQL.
-
-Recebe a conexão no construtor:
-
-```java
-public ContaDAO(Connection connection)
-```
-
----
-
-### ✔️ Método `salvar()`
-
-* Insere uma conta no banco
-* Utiliza `PreparedStatement`
-* Executa `INSERT`
-
----
-
-### ✔️ Método `listar()`
-
-* Busca todas as contas
-* Utiliza `SELECT`
-* Retorna:
-
-```java
-Set<Conta>
-```
-
----
-
-## 🔍 Conceitos JDBC Utilizados
-
-### Connection
-
-Representa a conexão com o banco.
-
-### DriverManager
-
-Responsável por abrir a conexão:
-
-```java
-DriverManager.getConnection(...)
-```
-
-### PreparedStatement
-
-Usado para:
-
-* INSERT
-* SELECT
-
-Vantagens:
-
-* Evita SQL Injection
-* Permite uso de parâmetros (`?`)
-
-### executeUpdate()
-
-Usado para:
-
-* INSERT
-* UPDATE
-* DELETE
-
-### executeQuery()
-
-Usado para:
-
-* SELECT
-
-Retorna um `ResultSet`
-
-### ResultSet
-
-Permite percorrer os dados:
-
-```java
-while(rs.next())
-```
-
----
-
 ## 🔄 Fluxo da Aplicação
 
-```
+```id="fluxofinal"
 Main
  ↓
-ConnectionFactory
+Service (regras de negócio)
  ↓
-Connection
- ↓
-ContaDAO
+DAO (acesso ao banco)
  ↓
 MySQL
 ```
 
 ---
 
-## 🚀 Próximos Passos
+## 🔌 Tecnologias Utilizadas
 
-* Finalizar método `listar()`
-* Implementar busca por número
-* Implementar depósito
-* Implementar saque
-* Atualizar saldo
-* Criar `ContaService`
-* Criar menu com `Scanner`
-* Validar regras de negócio
-* Implementar exclusão de contas
-* Melhorar mensagens e logs
+* Java
+* JDBC
+* MySQL
+* IntelliJ IDEA
 
 ---
 
-## 📈 Progresso Atual
+## 🛠️ Conceitos Aplicados
 
-✔ Conexão com MySQL
-✔ Criação da entidade Conta
-✔ ConnectionFactory implementada
-✔ Estrutura do DAO criada
-✔ Método `salvar()` iniciado
-✔ Método `listar()` quase finalizado
-
----
-
-## 🧠 Observação Final
-
-Este projeto foi desenvolvido com foco em **aprendizado prático**, evitando copiar soluções prontas e priorizando o entendimento da lógica por trás de cada implementação.
+* Connection / DriverManager
+* PreparedStatement
+* ResultSet
+* Execução de queries (`executeQuery`, `executeUpdate`)
+* Tratamento de exceções SQL
+* Uso de coleções (`Set`, `HashSet`)
+* Separação em camadas (DAO, Service, Model)
 
 ---
 
-✍️ Projeto em evolução.
+## 🧠 Regras de Negócio Implementadas
+
+* Validação de conta existente
+* Verificação de saldo antes de saque
+* Tratamento de operações inválidas
+* Controle de dados consistentes no banco
+
+---
+
+## ▶️ Como Executar
+
+1. Configurar o MySQL e criar o banco de dados
+2. Criar a tabela `conta`
+3. Atualizar as credenciais no `ConnectionFactory`
+4. Executar a classe `AppBanco`
+
+---
+
+## 📈 Resultado
+
+O projeto atingiu seu objetivo principal:
+
+✔ Integração completa com banco de dados
+✔ CRUD totalmente funcional
+✔ Lógica de negócio implementada
+✔ Estrutura organizada e escalável
+
+---
+
+## 🧠 Considerações Finais
+
+Este projeto representa a consolidação de conhecimentos essenciais para desenvolvimento backend com Java, servindo como base para aplicações mais complexas utilizando frameworks como Spring Boot.
+
+---
+
+🚀 Projeto finalizado com foco em aprendizado sólido e boas práticas.
