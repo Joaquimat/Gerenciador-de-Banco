@@ -5,7 +5,6 @@ import banco.connection.ConnectionFactory;
 import banco.model.Conta;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Set;
 
 public class ContaService {
@@ -154,11 +153,11 @@ public class ContaService {
 
             ContaDAO contaDAO = new ContaDAO(conn);
 
-            if (contaDAO.lerNum().contains(conta.getNumero()) && contaDAO.lerSaldo().contains(conta.getSaldo() > 0L)) {
+            if (contaDAO.lerNum().contains(conta.getNumero()) && contaDAO.lerSaldo(conta) > conta.getSaldo()) {
                 contaDAO.sacar(conta);
                 System.out.println("SAQUE REALIZADO");
             } else {
-                System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE OU NAO POSSUI SALDO");
+                System.out.println("ATENÇÃO:ESSA CONTA NÃO EXISTE OU NAO POSSUI SALDO SUFICIENTE");
             }
 
 
